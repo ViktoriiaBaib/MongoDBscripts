@@ -1,8 +1,21 @@
 from pymongo import MongoClient
-from pprint import pprint
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+mongo_config = config['SynDev']
+server = mongo_config['server']
+username = mongo_config['username']
+password = mongo_config['password']
+authSource = mongo_config['authSource']
+authMechanism = mongo_config['authMechanism']
 
 SynDev_client = MongoClient(
-
+    server,
+    username=username,
+    password=password,
+    authSource=authSource,
+    authMechanism=authMechanism
 )
 
 syndev_db = SynDev_client.SynDev
